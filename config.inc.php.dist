@@ -1,0 +1,19 @@
+<?php
+
+/* Path to your qmailadmin installation */
+$rcmail_config['qmailadmin_path'] = 'https://your-server.com/cgi-bin/qmailadmin/';
+
+/* Allow users to configure their vacation message? true or false */
+$rcmail_config['qmailadmin_allow_vacation'] = true;
+
+/* Allow users to change their password? true or false */
+$rcmail_config['qmailadmin_allow_password'] = true;
+
+/* Show a warning message on each page when vacation is on? true or false */
+$rcmail_config['qmailadmin_vacation_warning'] = true;
+
+/* Minimum password length for password changes. Integer */
+$rcmail_config['qmailadmin_password_min_length'] = 10;
+
+/* Charset used in qmailadmin ; defaults to 'ISO-8859-1' */
+$rcmail_config['qmailadmin_charset'] = 'ISO-8859-1';
