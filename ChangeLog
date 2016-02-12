@@ -1,3 +1,8 @@
+1.0.3, 2016-02-12
+	Added strong password check in password change dialog
+	Added explanation on what kind of char is needed in new password
+	Changed error messages to be more simple to understand
+	
 1.0.2, 2016-02-01
 	Added Internationalization support
 	Added en-US and pt-BR languages
