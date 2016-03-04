@@ -353,9 +353,7 @@ class qmailadmin extends rcube_plugin
 		    return $this->error($this->PassNeeds('qmailadmin_password_special_need'));
 		  }
 	  }
-
-	  return $this->error('tudo ok ate aqui'); 
-	 
+ 
 	  // Everything is ok! All checks ok!
 
       // Login to qmailadmin and get the modify user form
