@@ -343,7 +343,7 @@ class qmailadmin extends rcube_plugin
 			return $this->error($this->PassNeeds('qmailadmin_password_special_chars'));
 	      }
 		  $scf = false;
-		  for ($l = 0 ; $l++ ; $l < strlen($specialchars)) {
+		  for ($l = 0 ; $l < strlen($specialchars); $l++) {
 			if (strpos($password_new1, $specialchars[$l]) !== false) {
 			  $scf = true;
 			  break;
