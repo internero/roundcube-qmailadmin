@@ -131,7 +131,7 @@ class qmailadmin extends rcube_plugin
     if ($args['section'] == 'vacation' && $RCMAIL->config->get('qmailadmin_allow_vacation')) {
       $config = $RCMAIL->config->all();
 
-      $blocks = array('main' => array('name' => Q(rcube_label('mainoptions'))),
+      $blocks = array('main' => array('name' => rcube::Q($this->gettext('mainoptions'))),
 		      );
 
       // Vacation enabled?
@@ -165,8 +165,8 @@ class qmailadmin extends rcube_plugin
     }
     else if ($args['section'] == 'password' && $RCMAIL->config->get('qmailadmin_allow_password')) {
 
-      $blocks = array('main' => array('name' => Q(rcube_label('mainoptions'))), 
-					  'explanation' => array('name' => Q($this->gettext('qmail_password_explanation'))), 
+      $blocks = array('main' => array('name' => rcube::Q($this->gettext('mainoptions'))), 
+					  'explanation' => array('name' => rcube::Q($this->gettext('qmail_password_explanation'))), 
 		      );
 
       // Old password
@@ -296,39 +296,39 @@ class qmailadmin extends rcube_plugin
 
       // Verify if new password is long enough
       if (strlen($password_new1) < $RCMAIL->config->get('qmailadmin_password_min_length')) {
-		return $this->error($this->PassNeeds('qmailadmin_password_min_length'));  
+		return $this->error($this->PassNeeds('qmailadmin_password_min_length'), $args);  
       }
 	  
 	  // Verify if new password is longer than maximum allowed
       if (strlen($password_new1) > $RCMAIL->config->get('qmailadmin_password_max_length')) {
-		return $this->error($this->PassNeeds('qmailadmin_password_max_length'));  
+		return $this->error($this->PassNeeds('qmailadmin_password_max_length'), $args);  
       }
 
 	  // Verify if we have any letter set if both lowercase / uppercase are false
  	  if ((!($RCMAIL->config->get('qmailadmin_password_lower_need'))) && (!($RCMAIL->config->get('qmailadmin_password_upper_need')))) {
 		 if (preg_match('/[a-zA-Z]/', preg_quote($password_new1, '/')) !== 1) {
-	      return $this->error($this->PassNeeds('qmailadmin_password_letter_need'));
+	      return $this->error($this->PassNeeds('qmailadmin_password_letter_need'), $args);
 		 }
 	  }
 	  
 	  // Verify if new password has lowercase letters
 	  if ($RCMAIL->config->get('qmailadmin_password_lower_need')) {
 		if (preg_match('/[a-z]/', preg_quote($password_new1, '/')) !== 1) {
-	      return $this->error($this->PassNeeds('qmailadmin_password_lower_need'));
+	      return $this->error($this->PassNeeds('qmailadmin_password_lower_need'), $args);
 		}
 	  }
 		
 	  // Verify if new password has uppercase letters		
 	  if ($RCMAIL->config->get('qmailadmin_password_upper_need')) {
 		if (preg_match('/[A-Z]/', preg_quote($password_new1, '/')) !== 1) {
-		  return $this->error($this->PassNeeds('qmailadmin_password_upper_need'));
+		  return $this->error($this->PassNeeds('qmailadmin_password_upper_need'), $args);
 		}
 	  }
 	  
 	  // Verify if new password has numbers
 	  if ($RCMAIL->config->get('qmailadmin_password_number_need')) {
 		if (preg_match('/[0-9]/', preg_quote($password_new1, '/')) !== 1) {
-		  return $this->error($this->PassNeeds('qmailadmin_password_number_need'));
+		  return $this->error($this->PassNeeds('qmailadmin_password_number_need'), $args);
 		}
 	  }
 	  
@@ -340,7 +340,7 @@ class qmailadmin extends rcube_plugin
 		  }
 		  if (strlen($specialchars) > 20) {
 			// configuration error on qmailadmin_password_special_chars
-			return $this->error($this->PassNeeds('qmailadmin_password_special_chars'));
+			return $this->error($this->PassNeeds('qmailadmin_password_special_chars'), $args);
 	      }
 		  $scf = false;
 		  for ($l = 0 ; $l < strlen($specialchars); $l++) {
@@ -350,7 +350,7 @@ class qmailadmin extends rcube_plugin
 			}
 	      }
 		  if (!$scf) {
-		    return $this->error($this->PassNeeds('qmailadmin_password_special_need'));
+		    return $this->error($this->PassNeeds('qmailadmin_password_special_need'), $args);
 		  }
 	  }
  
