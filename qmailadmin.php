@@ -437,7 +437,7 @@ class qmailadmin extends rcube_plugin
     $email = $_SESSION['username'];
     $pos = strpos($email, '@');
     if ($pos === false) {
-      raise_error(array('code' => 1000, 'type' => 'php', 'message' => rcube::Q($this->gettext('erroruserdomainparts')).' '.$email), true, true);
+      rcube::raise_error(array('code' => 1000, 'type' => 'php', 'message' => rcube::Q($this->gettext('erroruserdomainparts')).' '.$email), true, true);
     }
     $user = substr($email, 0, $pos);
     $domain = substr($email, $pos+1);
@@ -454,7 +454,7 @@ class qmailadmin extends rcube_plugin
     $login_result = $this->http_post($url, $params);
 
     if (strpos($login_result, 'Modify User: '.$email) === false) {
-      raise_error(array('code' => 1001, 'type' => 'php', 'message' => rcube::Q($this->gettext('unabletologinqmailadmin'))), true, true);
+      rcube::raise_error(array('code' => 1001, 'type' => 'php', 'message' => rcube::Q($this->gettext('unabletologinqmailadmin'))), true, true);
     }
 
     // Parse the login results, which should be the modify user form
@@ -464,7 +464,7 @@ class qmailadmin extends rcube_plugin
 
     $form_els = $form_doc->getElementsByTagName('form');
     if ($form_els->length != 1) {
-      raise_error(array('code' => 1002, 'type' => 'php', 'message' => rcube::Q($this->gettext('unabletofindmodityform'))), true, true);
+      rcube::raise_error(array('code' => 1002, 'type' => 'php', 'message' => rcube::Q($this->gettext('unabletofindmodityform'))), true, true);
     }
 
     $form = $form_els->item(0);
@@ -545,12 +545,12 @@ class qmailadmin extends rcube_plugin
 
     $fp = fopen($url, 'rb', false, stream_context_create($context_params));
     if (!$fp) {
-      raise_error(array('code' => 1003, 'type' => 'php', 'message' => rcube::Q($this->gettext('cantconnect')).' '.$url), true, true);
+      rcube::raise_error(array('code' => 1003, 'type' => 'php', 'message' => rcube::Q($this->gettext('cantconnect')).' '.$url), true, true);
     }
 
     $response = stream_get_contents($fp);
     if ($response === false) {
-      raise_error(array('code' => 1004, 'type' => 'php', 'message' => rcube::Q($this->gettext('cantreadfrom')).' '.$url), true, true);
+      rcube::raise_error(array('code' => 1004, 'type' => 'php', 'message' => rcube::Q($this->gettext('cantreadfrom')).' '.$url), true, true);
     }
 
     fclose($fp);
